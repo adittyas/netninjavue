@@ -1,21 +1,25 @@
 <template>
   <div id="app">
-    <show-blog></show-blog>
+    <router-link to="/">Home</router-link>|
+    <router-link to="/add">Add Post</router-link>|
+    <router-link to="/show">Show Post</router-link>|
+    <router-view></router-view>
+    <!-- <show-blog></show-blog>
     <list-blog></list-blog>
-    <add-blog v-show="t"></add-blog>
+    <add-blog v-show="t"></add-blog>-->
   </div>
 </template>
 
 <script>
-import adBlog from "@/components/adBlog.vue";
-import showBlog from "@/components/showBlog.vue";
-import listBlog from "@/components/listBlog.vue";
+// import adBlog from "@/components/adBlog.vue";
+// import showBlog from "@/components/showBlog.vue";
+// import listBlog from "@/components/listBlog.vue";
 
 export default {
   components: {
-    "add-blog": adBlog,
-    "show-blog": showBlog,
-    "list-blog": listBlog
+    // "add-blog": adBlog,
+    // "show-blog": showBlog,
+    // "list-blog": listBlog
   },
   data() {
     return {
