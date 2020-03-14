@@ -10,6 +10,8 @@
 </template>
  
 <script>
+import searchMixin from "@/mixins/searchMixin.js";
+
 export default {
   data() {
     return {
@@ -19,11 +21,11 @@ export default {
   },
   methods: {},
   computed: {
-    filteredBlogs: function() {
-      return this.blogs.filter(blog => {
-        return blog.title.match(this.search);
-      });
-    }
+    // filteredBlogs: function() {
+    //   return this.blogs.filter(blog => {
+    //     return blog.title.match(this.search);
+    //   });
+    // }
   },
   created() {
     this.$http
@@ -47,7 +49,8 @@ export default {
             .slice(2, 8);
       }
     }
-  }
+  },
+  mixins: [searchMixin]
 };
 </script> 
 
