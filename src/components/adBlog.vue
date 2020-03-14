@@ -1,11 +1,17 @@
 <template>
   <div id="add-blog">
     <h2>add new blog content</h2>
-    <form action="#">
+    <form action="#" v-if="submitted">
       <label for="title">title</label>
       <input type="text" name="title" id="title" v-model.lazy="blog.title" />
       <label for="content">content</label>
-      <textarea v-model.lazy="blog.content" name="content" id="content" cols="30" rows="10"></textarea>
+      <textarea
+        v-model.lazy="blog.content"
+        name="content"
+        id="content"
+        cols="30"
+        rows="10"
+      ></textarea>
       <div id="checkbox">
         <label for="ninjas">ninjas</label>
         <input type="checkbox" value="ninjas" v-model="blog.categories" />
@@ -17,19 +23,27 @@
         <input type="checkbox" value="cheese" v-model="blog.categories" />
       </div>
       <select name="author" id="author" v-model="blog.author">
-        <option v-for="author in authors" :key="author" :value="author">{{author}}</option>
+        <option v-for="author in authors" :key="author" :value="author">{{
+          author
+        }}</option>
       </select>
+      <button @click.prevent="post">Add Blog</button>
     </form>
+    <div v-if="!submitted">
+      <h4>Thanks for adding your post</h4>
+    </div>
     <div id="preview">
       <h3>Priview Blog</h3>
-      <p>Blog title : {{blog.title}}</p>
+      <p>Blog title : {{ blog.title }}</p>
       <p>Blog content :</p>
-      <p>{{blog.content}}</p>
+      <p>{{ blog.content }}</p>
       <p>Blog Categories :</p>
       <ul>
-        <li v-for="category in blog.categories" :key="category">{{category}}</li>
+        <li v-for="category in blog.categories" :key="category">
+          {{ category }}
+        </li>
       </ul>
-      <p>Blog Author : {{blog.author}}</p>
+      <p>Blog Author : {{ blog.author }}</p>
     </div>
   </div>
 </template>
@@ -44,8 +58,23 @@ export default {
         categories: [],
         author: ""
       },
-      authors: ["The net ninja", "the avenger", "the vue"]
+      authors: ["The net ninja", "the avenger", "the vue"],
+      submitted: true
     };
+  },
+  methods: {
+    post: function() {
+      this.$http
+        .post("https://jsonplaceholder.typicode.com/posts/", {
+          title: this.blog.title,
+          body: this.blog.content,
+          userId: 1
+        })
+        .then(function(data) {
+          console.log(data);
+          this.submitted = false;
+        });
+    }
   }
 };
 </script>
