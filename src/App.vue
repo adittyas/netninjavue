@@ -1,18 +1,23 @@
 <template>
   <div id="app">
-    <add-blog></add-blog>
+    <show-blog></show-blog>
+    <add-blog v-show="t"></add-blog>
   </div>
 </template>
 
 <script>
 import adBlog from "@/components/adBlog.vue";
+import showBlog from "@/components/showBlog.vue";
 
 export default {
   components: {
-    "add-blog": adBlog
+    "add-blog": adBlog,
+    "show-blog": showBlog
   },
   data() {
-    return {};
+    return {
+      t: false
+    };
   },
   methods: {}
 };
