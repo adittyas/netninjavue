@@ -31,6 +31,22 @@ export default {
       .then(function(data) {
         this.blogs = data.body.slice(0, 10);
       });
+  },
+  filters: {
+    "to-uppercase": function(val) {
+      return val.toUpperCase();
+    }
+  },
+  directives: {
+    rainbow: {
+      bind(el) {
+        el.style.color =
+          "#" +
+          Math.random()
+            .toString()
+            .slice(2, 8);
+      }
+    }
   }
 };
 </script> 
